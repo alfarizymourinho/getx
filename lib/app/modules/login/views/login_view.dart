@@ -2,6 +2,7 @@ import 'package:getx_paris/app/helpers/size_helper.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:getx_paris/app/modules/register/views/register_view.dart';
 
 import '../controllers/login_controller.dart';
 
@@ -24,6 +25,7 @@ class LoginView extends GetView<LoginController> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Card(
+                    color: Color.fromARGB(255, 60, 147, 147),
                     elevation: 4,
                     margin: EdgeInsets.all(16),
                     shape: RoundedRectangleBorder(
@@ -105,7 +107,9 @@ class LoginView extends GetView<LoginController> {
                                   ),
                                 ),
                                 InkWell(
-                                  onTap: () {},
+                                  onTap: () {
+                                    Get.to(RegisterView());
+                                  },
                                   child: Text(
                                     'Register',
                                     style: TextStyle(
