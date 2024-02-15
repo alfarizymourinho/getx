@@ -1,19 +1,15 @@
-
 import 'dart:convert';
-
+import 'package:flutter/material.dart';
+import 'package:getx_paris/app/providers/api.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-
-import '../../../providers/api.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginController extends GetxController {
-  //TODO: Implement LoginController
+  final formKey = GlobalKey<FormState>();
 
   var email = ''.obs;
   var password = ''.obs;
-
-  get formKey => null;
 
   void onEmailChanged(String value) {
     email.value = value;
@@ -29,15 +25,12 @@ class LoginController extends GetxController {
       var responseBody = json.decode(response.body);
 
       if (response.statusCode == 200 && responseBody['token'] != null) {
-        // Login successful
         _saveUserData(responseBody);
-        Get.offAllNamed('/bottom-menu'); // Navigate to the home page
+        Get.offAllNamed('/bottom-menu');
       } else {
-        // Login failed, handle the error
         Get.snackbar('Error', 'Login failed. ${responseBody['message']}');
       }
     } catch (e) {
-      // Handle other errors
       print('Error during login: $e');
       Get.snackbar('Error', 'An error occurred during login.');
     }
@@ -47,11 +40,13 @@ class LoginController extends GetxController {
     var apiUrl = '/login';
     var requestBody = {'email': email.value, 'password': password.value};
 
-    return await http.post(
+    var response = await http.post(
       Uri.parse(Api.baseUrl + apiUrl),
-      body: jsonEncode(requestBody),
-      headers: {'Content-Type': 'application/json'},
+      body: requestBody,
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
     );
+
+    return response;
   }
 
   void _saveUserData(Map<String, dynamic> responseBody) async {

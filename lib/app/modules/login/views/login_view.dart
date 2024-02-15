@@ -92,7 +92,11 @@ class LoginView extends GetView<LoginController> {
                                   "Login",
                                   style: TextStyle(color: Colors.white),
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  if (controller.formKey.currentState!
+                                    .validate()) {
+                                  controller.login();
+                                }},
                               ),
                             ),
                             SizedBox(height: 18),

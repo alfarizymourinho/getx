@@ -1,13 +1,11 @@
+// profil_view.dart
+import 'package:getx_paris/app/modules/profil/controllers/profil_controller.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 
-import '../controllers/profil_controller.dart';
-
 class ProfilView extends StatelessWidget {
-  ProfilView({Key? key}) : super(key: key);
+  final ProfilController profilController = Get.put(ProfilController());
 
-  ProfilController controller = Get.put(ProfilController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,12 +14,12 @@ class ProfilView extends StatelessWidget {
         actions: [
           IconButton(
             icon: Icon(Icons.logout),
-            onPressed: () => controller.logout(),
+            onPressed: () => profilController.logout(),
           ),
         ],
       ),
       body: Obx(
-        () => controller.isLoading.value
+        () => profilController.isLoading.value
             ? Center(child: CircularProgressIndicator())
             : Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -29,17 +27,17 @@ class ProfilView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Text(
-                    //   'ID: ${controller.user['id']}',
+                    //   'ID: ${profilController.user['id']}',
                     //   style: TextStyle(fontSize: 18),
                     // ),
                     SizedBox(height: 8),
                     Text(
-                      'Nama: ${controller.user['name']}',
+                      'Nama: ${profilController.user['data']['name']}',
                       style: TextStyle(fontSize: 18),
                     ),
                     SizedBox(height: 8),
                     Text(
-                      'Email: ${controller.user['email']}',
+                      'Email: ${profilController.user['data']['email']}',
                       style: TextStyle(fontSize: 18),
                     ),
                     // SizedBox(height: 8),

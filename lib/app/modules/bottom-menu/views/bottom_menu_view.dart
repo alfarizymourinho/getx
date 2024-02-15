@@ -1,10 +1,9 @@
 import 'package:getx_paris/app/modules/counter/views/counter_view.dart';
 import 'package:getx_paris/app/modules/home/views/home_view.dart';
+import 'package:getx_paris/app/modules/pasien/views/pasien_view.dart';
 import 'package:getx_paris/app/modules/profil/views/profil_view.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-
 import '../controllers/bottom_menu_controller.dart';
 
 class BottomMenuView extends GetView<BottomMenuController> {
@@ -14,7 +13,7 @@ class BottomMenuView extends GetView<BottomMenuController> {
     return Scaffold(
       body: Obx(() => IndexedStack(
             index: controller.currentIndex.value,
-            children: [HomeView(), CounterView(), ProfilView()],
+            children: [HomeView(), CounterView(), PasienView(),ProfilView()],
           )),
       bottomNavigationBar: Obx(
         () => BottomNavigationBar(
@@ -30,6 +29,10 @@ class BottomMenuView extends GetView<BottomMenuController> {
             BottomNavigationBarItem(
               icon: Icon(Icons.assignment),
               label: 'Counter',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.lock_clock),
+              label: 'Profil',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),

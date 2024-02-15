@@ -1,9 +1,8 @@
-import 'dart:convert';
-
 import 'package:getx_paris/app/providers/api.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilController extends GetxController {
   var isLoading = true.obs;
@@ -30,7 +29,7 @@ class ProfilController extends GetxController {
       var headers = {'Authorization': 'Bearer $token'};
 
       // Perform user details API request
-      var apiUrl = '/user';
+      var apiUrl = '/user/9';
       var response = await http.get(
         Uri.parse(Api.baseUrl + apiUrl),
         headers: headers,
