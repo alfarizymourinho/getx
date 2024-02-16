@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_paris/app/data/models/pasien_model.dart';
-import 'edit_pasien_view.dart';
+
 import 'show_pasien_view.dart';
 import 'package:getx_paris/app/modules/pasien/controllers/pasien_controller.dart';
 
@@ -34,7 +34,7 @@ class PasienView extends StatelessWidget {
                     title: Row(
                       children: [
                         Expanded(
-                          child: Text(pasien.name),
+                          child: Text(pasien.nama),
                         ),
                         IconButton(
                           icon: Icon(Icons.edit),
@@ -57,7 +57,7 @@ class PasienView extends StatelessWidget {
                         ),
                       ],
                     ),
-                    subtitle: Text(pasien.jeniskelamin),
+                    subtitle: Text(pasien.jenisKelamin),
                     onTap: () {
                       // Pass the 'isEditable' flag to indicate whether it's for editing or viewing
                       pasien.isEditable =
@@ -77,7 +77,7 @@ class PasienView extends StatelessWidget {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text('Delete Pasien'),
-          content: Text('Are you sure you want to delete ${pasien.name}?'),
+          content: Text('Are you sure you want to delete ${pasien.nama}?'),
           actions: <Widget>[
             TextButton(
               onPressed: () {

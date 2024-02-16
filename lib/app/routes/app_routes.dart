@@ -23,5 +23,5 @@ abstract class _Paths {
   static const PASIEN = '/pasien';
   static const String TambahPasien = '/tambah-pasien';
   static const String EditPasien = '/edit-pasien';
-  static const String DetailPasien = '/edit-pasien';
+  static const String DetailPasien = '/detail-pasien';
 }

@@ -14,8 +14,8 @@ class EditPasienView extends StatelessWidget {
   final TextEditingController noTelpController = TextEditingController();
 
   EditPasienView({required this.pasien}) {
-    namaController.text = pasien.name;
-    jeniskelamin.value = pasien.jeniskelamin;
+    namaController.text = pasien.nama;
+    jeniskelamin.value = pasien.jenisKelamin;
     alamatController.text = pasien.alamat;
     tglLahir.value = pasien.tglLahir;
     noTelpController.text = pasien.noTelp;

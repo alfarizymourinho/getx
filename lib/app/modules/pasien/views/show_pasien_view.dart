@@ -18,8 +18,8 @@ class DetailPasienView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Nama: ${pasien.name}'),
-            Text('Jenis Kelamin: ${pasien.jeniskelamin}'),
+            Text('Nama: ${pasien.nama}'),
+            Text('Jenis Kelamin: ${pasien.jenisKelamin}'),
             Text('Alamat: ${pasien.alamat}'),
             Text('Tanggal Lahir: ${pasien.tglLahir}'),
             Text('No. Telp: ${pasien.noTelp}'),

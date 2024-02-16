@@ -3,22 +3,22 @@ import 'package:get/get.dart';
 import 'package:getx_paris/app/modules/pasien/controllers/pasien_controller.dart';
 
 class TambahPasienView extends StatelessWidget {
-  final PasienController controller = Get.put(PasienController());
-  final RxString jeniskelamin = 'Laki-laki'.obs;
-  final Rx<DateTime> tglLahir = Rx<DateTime>(DateTime.now());
+  final PasienController controller = Get.find<PasienController>();
   final TextEditingController namaController = TextEditingController();
+  final RxString jenisKelamin = 'Laki-laki'.obs;
   final TextEditingController alamatController = TextEditingController();
+  final TextEditingController tglLahirController = TextEditingController();
   final TextEditingController noTelpController = TextEditingController();
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: tglLahir.value,
+      initialDate: DateTime.now(),
       firstDate: DateTime(1900),
       lastDate: DateTime(2101),
     );
-    if (picked != null) {
-      tglLahir.value = picked;
+    if (picked != null && picked != DateTime.now()) {
+      tglLahirController.text = "${picked.year}-${picked.month}-${picked.day}";
     }
   }
 
@@ -38,7 +38,7 @@ class TambahPasienView extends StatelessWidget {
             ),
             Obx(
               () => DropdownButtonFormField<String>(
-                value: jeniskelamin.value,
+                value: jenisKelamin.value,
                 items: ['Laki-laki', 'Perempuan']
                     .map((String value) => DropdownMenuItem<String>(
                           value: value,
@@ -46,7 +46,7 @@ class TambahPasienView extends StatelessWidget {
                         ))
                     .toList(),
                 onChanged: (newValue) {
-                  jeniskelamin.value = newValue!;
+                  jenisKelamin.value = newValue!;
                 },
                 decoration: InputDecoration(labelText: 'Jenis Kelamin'),
               ),
@@ -55,28 +55,15 @@ class TambahPasienView extends StatelessWidget {
               controller: alamatController,
               decoration: InputDecoration(labelText: 'Alamat'),
             ),
-            InkWell(
+            GestureDetector(
               onTap: () => _selectDate(context),
-              child: InputDecorator(
-                decoration: InputDecoration(
-                  labelText: 'Tanggal Lahir',
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Expanded(
-                      child: TextFormField(
-                        enabled: false,
-                        controller: TextEditingController(
-                          text: '${tglLahir.value}',
-                        ),
-                        decoration: InputDecoration(
-                          labelText: 'Tanggal Lahir',
-                          suffixIcon: Icon(Icons.calendar_today),
-                        ),
-                      ),
-                    ),
-                  ],
+              child: AbsorbPointer(
+                child: TextFormField(
+                  controller: tglLahirController,
+                  decoration: InputDecoration(
+                    labelText: 'Tanggal Lahir',
+                    suffixIcon: Icon(Icons.calendar_today),
+                  ),
                 ),
               ),
             ),
@@ -90,11 +77,12 @@ class TambahPasienView extends StatelessWidget {
                 if (_validateInput()) {
                   controller.tambahPasien(
                     namaController.text,
-                    jeniskelamin.value,
+                    jenisKelamin.value,
                     alamatController.text,
-                    '${tglLahir.value}',
+                    tglLahirController.text,
                     noTelpController.text,
                   );
+                  Get.back(); // Kembali ke halaman sebelumnya
                 }
               },
               child: Text('Simpan'),
@@ -107,9 +95,9 @@ class TambahPasienView extends StatelessWidget {
 
   bool _validateInput() {
     if (namaController.text.isEmpty ||
-        jeniskelamin.value.isEmpty ||
+        jenisKelamin.value.isEmpty ||
         alamatController.text.isEmpty ||
-        tglLahir.value ==  ||
+        tglLahirController.text.isEmpty ||
         noTelpController.text.isEmpty) {
       Get.snackbar('Error', 'Semua field harus diisi');
       return false;

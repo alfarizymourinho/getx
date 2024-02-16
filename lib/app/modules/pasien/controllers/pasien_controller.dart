@@ -10,6 +10,8 @@ import 'package:http/http.dart' as http;
 class PasienController extends GetxController {
   var pasienList = <Pasien>[].obs;
 
+  get isLoading => null;
+
   @override
   void onInit() {
     super.onInit();
