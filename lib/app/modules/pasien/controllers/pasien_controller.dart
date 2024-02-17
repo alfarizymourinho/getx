@@ -123,7 +123,7 @@ class PasienController extends GetxController {
       if (response.statusCode == 200) {
         Get.snackbar('Sukses', 'Pasien berhasil diubah');
         fetchData(); // Refresh the pasienList
-        Get.offAndToNamed(Routes.BOTTOM_MENU);
+        Get.offAndToNamed(Routes.PASIEN);
       } else {
         throw Exception('Failed to edit pasien');
       }

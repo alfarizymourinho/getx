@@ -31,21 +31,29 @@ class PasienView extends StatelessWidget {
                 itemBuilder: (context, index) {
                   var pasien = controller.pasienList[index];
                   return ListTile(
-                    title: Row(
+                    title: Text(pasien.nama), // Menampilkan nama pasien
+                    subtitle: Text(pasien.alamat), // Menampilkan alamat pasien
+                    onTap: () {
+                      // Pass the 'isEditable' flag to indicate whether it's for editing or viewing
+                      pasien.isEditable =
+                          false; // Set to false for 'Lihat Detail'
+                      controller.showPasienDetails(pasien);
+                    },
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
-                        Expanded(
-                          child: Text(pasien.nama),
-                        ),
                         IconButton(
                           icon: Icon(Icons.edit),
                           onPressed: () {
-                            Get.toNamed('/edit-pasien');
+                            // Navigate to edit page
+                            Get.toNamed('/edit-pasien', arguments: pasien);
                           },
                         ),
                         IconButton(
                           icon: Icon(Icons.visibility),
                           onPressed: () {
-                            Get.to(() => DetailPasienView(pasien: pasien));
+                            // Show details view
+                            controller.showPasienDetails(pasien);
                           },
                         ),
                         IconButton(
@@ -57,13 +65,6 @@ class PasienView extends StatelessWidget {
                         ),
                       ],
                     ),
-                    subtitle: Text(pasien.jenisKelamin),
-                    onTap: () {
-                      // Pass the 'isEditable' flag to indicate whether it's for editing or viewing
-                      pasien.isEditable =
-                          true; // Set to false for 'Lihat Detail'
-                      controller.showPasienDetails(pasien);
-                    },
                   );
                 },
               ),

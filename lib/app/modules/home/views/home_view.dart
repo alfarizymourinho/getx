@@ -18,6 +18,17 @@ class HomeView extends StatelessWidget {
           children: [
             GestureDetector(
                 onTap: () {
+                  Get.toNamed("/profil");
+                },
+                child: const Card(
+                  color: Colors.amber,
+                  margin: EdgeInsets.all(16),
+                  child: Center(
+                    child: Text("PROFILE"),
+                  ),
+                )),
+            GestureDetector(
+                onTap: () {
                   Get.toNamed("/counter");
                 },
                 child: const Card(
@@ -25,6 +36,17 @@ class HomeView extends StatelessWidget {
                   margin: EdgeInsets.all(16),
                   child: Center(
                     child: Text("Counter Page"),
+                  ),
+                )),
+                GestureDetector(
+                onTap: () {
+                  Get.toNamed("/pasien");
+                },
+                child: const Card(
+                  color: Colors.amber,
+                  margin: EdgeInsets.all(16),
+                  child: Center(
+                    child: Text("Halaman Pasien"),
                   ),
                 )),
             GestureDetector(

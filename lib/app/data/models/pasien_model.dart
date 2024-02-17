@@ -28,4 +28,6 @@ class Pasien {
       noTelp: json['noTelp'],
     );
   }
+
+  get jeniskelamin => null;
 }

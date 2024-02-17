@@ -45,7 +45,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Api {
-  static final String baseUrl = 'http://192.168.107.52:8080/api/v1';
+  static final String baseUrl = 'http://192.168.219.52:8080/api/v1';
 
   static Future<Map<String, String>> getHeaders() async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();

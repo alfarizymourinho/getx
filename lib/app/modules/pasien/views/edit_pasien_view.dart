@@ -98,6 +98,8 @@ class EditPasienView extends StatelessWidget {
                     tglLahir.value,
                     noTelpController.text,
                   );
+                  // Directly go back to PasienView after saving
+                  Get.toNamed("/pasien");
                 }
               },
               child: Text('Simpan'),
